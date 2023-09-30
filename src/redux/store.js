@@ -3,8 +3,10 @@ import thunk from 'redux-thunk';
 import initialState from './InitialState';
 import tablesReducer from './tablesRedux';
 
+export const getAllTables = (state) => state.tables;
+
 const subreducers = {
-    posts: tablesReducer,
+    tables: tablesReducer,
 }
 
 const reducer = combineReducers(subreducers);
