@@ -11,7 +11,6 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getTablesById, removeTable } from '../../../redux/tablesRedux'
 import { useParams } from 'react-router';
-import { Navigate } from 'react-router-dom';
 
 
 
@@ -28,9 +27,7 @@ const Tables = () => {
 
 
 
-  //const { tableId } = useParams();
 
-  //const tableData = useSelector(state => getTablesById(state, tableId));
 
 
   const dispatch = useDispatch();
@@ -45,7 +42,6 @@ const Tables = () => {
     
  const tables = useSelector(getAllTables);
 
-  
 
   return (
     <Container className='mb-4'>

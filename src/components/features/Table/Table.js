@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './Table.module.scss';
 import { editTable } from '../../../redux/tablesRedux'
 import TableForm from '../TableForm/TableForm'
+import { Navigate } from 'react-router-dom';
 
 
 const Table = () => {
@@ -21,7 +22,7 @@ const Table = () => {
   const table = useSelector(state => getTablesById(state, tableId));
 
 
-
+  if (!table) return <Navigate to="/" />
 
 
   return (

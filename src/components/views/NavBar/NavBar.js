@@ -6,7 +6,7 @@ const NavBar = () => {
   return (
     <Navbar expand="lg" bg="primary" variant="dark" className="px-4 mt-4 mb-4 rounded d-flex justify-content-between">
       <div>
-        <Navbar.Brand href="#home">Post App</Navbar.Brand>
+        <Navbar.Brand href="#home">Waiter App</Navbar.Brand>
       </div>
       <div>
         <Nav className="me-auto">

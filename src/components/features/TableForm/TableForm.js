@@ -1,9 +1,11 @@
+import styles from './TableForm.module.scss';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
 import { FormControl } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import { useSelector } from 'react-redux';
+import clsx from 'clsx';
 
 const PostForm = ({ action, actionText, ...props }) => {
     const [bill, setBill] = useState(props.bill || '');
@@ -25,6 +27,32 @@ const PostForm = ({ action, actionText, ...props }) => {
             console.log('faliure');
         }
     };
+
+    const handlePeopleAmountChange= (e) => {
+        if (e.target.value>10) {
+            setPeopleAmount(10)
+        } else if (e.target.value<0){
+            setPeopleAmount(0)
+        } else if (e.target.value > maxPeopleAmount){
+            setPeopleAmount(maxPeopleAmount);
+        } else {
+        setPeopleAmount(e.target.value)
+    }
+}
+
+
+const handleMaxPeopleAmountChange= (e) => {
+    if (e.target.value>10) {
+        setMaxPeopleAmount(10)
+    } else if (e.target.value<0){
+        setMaxPeopleAmount(0)
+    } else if (peopleAmount> e.target.value) {
+        setPeopleAmount(e.target.value)
+        setMaxPeopleAmount(e.target.value)
+    } else {
+    setMaxPeopleAmount(e.target.value)
+}
+}
     const handleSubmit = () => {
       //setDateError(!publishedDate)
         action({ bill, peopleAmount, maxPeopleAmount, status });
@@ -35,7 +63,7 @@ const PostForm = ({ action, actionText, ...props }) => {
       return (
         <Form onSubmit={validate(handleSubmit)}>
 
-      <Form.Group className="mb-3" controlId="author">
+      <Form.Group className={clsx("mb-3", status !== "Busy" && styles.notActive)} controlId="bill">
         <Form.Label>Bill:</Form.Label>
         <Form.Control type="text" placeholder="Bill" value={bill} onChange={e => setBill(e.target.value)} />
       </Form.Group>
@@ -53,8 +81,8 @@ const PostForm = ({ action, actionText, ...props }) => {
       </Form.Group>
       <Form.Group className="mb-3" controlId="description">
         <Form.Label>People:</Form.Label>
-        <Form.Control type="number" value={peopleAmount} onChange={e => setPeopleAmount(e.target.value)}/>
-        <Form.Control type="number" value={maxPeopleAmount} onChange={e => setMaxPeopleAmount(e.target.value)}/>
+        <Form.Control type="number" value={peopleAmount} onChange={handlePeopleAmountChange}/>
+        <Form.Control type="number" value={maxPeopleAmount} onChange={handleMaxPeopleAmountChange}/>
      </Form.Group>
       <Button variant="primary" type="submit">
         {actionText}
