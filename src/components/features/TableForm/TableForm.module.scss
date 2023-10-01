@@ -1,4 +1,17 @@
 .notActive {
-    display: none;
-    background-color: aqua;
+    visibility: hidden;
+}
+
+.text {
+    font-weight: 800;
+    padding-right: 20px;
+}
+
+.container {
+    max-width: 20%;
+}
+.devider {
+    border: none;
+    padding-left: 10px;
+    padding-right: 10px;
 }

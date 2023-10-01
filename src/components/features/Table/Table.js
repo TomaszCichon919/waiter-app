@@ -3,7 +3,7 @@ import { getTablesById} from '../../../redux/tablesRedux'
 import { useParams } from 'react-router';
 import { useNavigate } from 'react-router-dom';
 import styles from './Table.module.scss';
-import { editTable } from '../../../redux/tablesRedux'
+import { editTableRequest } from '../../../redux/tablesRedux'
 import TableForm from '../TableForm/TableForm'
 import { Navigate } from 'react-router-dom';
 
@@ -11,8 +11,8 @@ import { Navigate } from 'react-router-dom';
 const Table = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleSubmit = post => {
-    dispatch(editTable({ ...post, id: tableId }));
+  const handleSubmit = table => {
+    dispatch(editTableRequest({ ...table, id: tableId }));
     navigate('/')
   }
 

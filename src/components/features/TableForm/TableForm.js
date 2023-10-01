@@ -61,16 +61,10 @@ const handleMaxPeopleAmountChange= (e) => {
     
     
       return (
-        <Form onSubmit={validate(handleSubmit)}>
-
-      <Form.Group className={clsx("mb-3", status !== "Busy" && styles.notActive)} controlId="bill">
-        <Form.Label>Bill:</Form.Label>
-        <Form.Control type="text" placeholder="Bill" value={bill} onChange={e => setBill(e.target.value)} />
-      </Form.Group>
-
+        <Form className={styles.container} onSubmit={validate(handleSubmit)}>
       
-      <Form.Group className="mb-3" controlId="status">
-        <Form.Label>Status:</Form.Label>
+      <Form.Group className="mb-3 d-flex" controlId="status">
+        <Form.Label className={styles.text}>Status:</Form.Label>
         <Form.Select aria-label="Default select example"  value={status}
         onChange={handleSelectChange}>
         <option key={"busy"} value={"Busy"}>Busy</option>
@@ -79,11 +73,21 @@ const handleMaxPeopleAmountChange= (e) => {
         <option key={"cleaninig"} value={"Cleaninig"}>Cleaning</option>
     </Form.Select>
       </Form.Group>
-      <Form.Group className="mb-3" controlId="description">
-        <Form.Label>People:</Form.Label>
-        <Form.Control type="number" value={peopleAmount} onChange={handlePeopleAmountChange}/>
-        <Form.Control type="number" value={maxPeopleAmount} onChange={handleMaxPeopleAmountChange}/>
+      <Form.Group className="mb-3 d-flex" controlId="people">
+        <Form.Label className={styles.text}>People:</Form.Label>
+        <Form.Control className='w-25' type="number" value={peopleAmount} onChange={handlePeopleAmountChange}/>
+        <div className="input-group-append">
+                        <span className={styles.devider}>/</span>
+                    </div>
+        <Form.Control className='w-25' type="number" value={maxPeopleAmount} onChange={handleMaxPeopleAmountChange}/>
      </Form.Group>
+     <Form.Group className={clsx("mb-3 d-flex", status !== "Busy" && styles.notActive)} controlId="bill">
+        <Form.Label className={styles.text}>Bill:</Form.Label>
+        <div className="input-group-append">
+                        <span className={styles.devider}>$</span>
+                    </div>
+        <Form.Control className='w-25' type="text" placeholder="Bill" value={bill} onChange={e => setBill(e.target.value)} />
+      </Form.Group>
       <Button variant="primary" type="submit">
         {actionText}
       </Button>

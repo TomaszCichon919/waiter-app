@@ -1,14 +1,14 @@
 
-.wrapper {
-    border: solid;
-    border-radius: 2%;
-    border-width: 1px;
-    margin: 10px 5px;   
-    
-
-
-}
 .caption{
     padding-right: 5px;
-    font-weight: 600;
+    font-weight: 800;
+    display: inline-block;
+    padding-left: 50px;
+    padding-top: 10px;
+}
+
+.textWrapper{
+    display: flex;
+    align-items: center;
+    text-align: center;
 }
