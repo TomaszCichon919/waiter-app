@@ -1,4 +1,4 @@
-import {API_URL} from '../config'
+import { API_URL } from '../config'
 
 //action names
 const createActionName = actionName => `app/tables/${actionName}`;
@@ -16,55 +16,55 @@ export const getTablesById = ({ tables }, TableId) => tables.find(table => table
 export const updateTables = payload => ({ type: UPDATE_TABLES, payload });
 export const fetchTables = () => {
     return (dispatch) => {
-    fetch(API_URL + '/tables')
-    .then(res => res.json())
-    .then(tables => dispatch(updateTables(tables)))
-  }
+        fetch(API_URL + '/tables')
+            .then(res => res.json())
+            .then(tables => dispatch(updateTables(tables)))
+    }
 };
 export const addTableRequest = (newTable) => {
     return (dispatch) => {
 
         fetch(API_URL + '/tables')
-        .then(res => res.json())
-        .then(tables => {
-            const nextTableId = tables.length +1
-       
-        const options = {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({id: nextTableId.toString(), ...newTable}),
-    };
-    fetch(API_URL + '/tables', options)
-    .then(() => dispatch(addTable(newTable)))
-})
-        }
-    }
+            .then(res => res.json())
+            .then(tables => {
+                const nextTableId = tables.length + 1
 
-    export const removeTableRequest = (tableToRemove) => {
-        return (dispatch) => {
-            const options = {
-                method: 'DELETE',
-            }
-        fetch(API_URL + '/tables/'+ tableToRemove, options)
-        .then(() => dispatch(removeTable(tableToRemove)))
-            }
-        }
-
-        export const editTableRequest = (editedTable) => {
-            return (dispatch) => {
                 const options = {
-                    method: 'PUT',
+                    method: 'POST',
                     headers: {
-                      'Content-Type': 'application/json'
+                        'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(editedTable),
-                  };
-            fetch(API_URL + '/tables/', options)
+                    body: JSON.stringify({ id: nextTableId.toString(), ...newTable }),
+                };
+                fetch(API_URL + '/tables', options)
+                    .then(() => dispatch(addTable(newTable)))
+            })
+    }
+}
+
+export const removeTableRequest = (tableToRemove) => {
+    return (dispatch) => {
+        const options = {
+            method: 'DELETE',
+        }
+        fetch(API_URL + '/tables/' + tableToRemove, options)
+            .then(() => dispatch(removeTable(tableToRemove)))
+    }
+}
+
+export const editTableRequest = (editedTable) => {
+    return (dispatch) => {
+        const options = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(editedTable),
+        };
+        fetch(API_URL + '/tables/'+ editedTable.id, options)
             .then(() => dispatch(editTable(editedTable)))
-                }
-            }
+    }
+}
 
 
 // action creators

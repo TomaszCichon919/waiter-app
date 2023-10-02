@@ -9,54 +9,55 @@ import Modal from 'react-bootstrap/Modal';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { removeTableRequest } from '../../../redux/tablesRedux'
-
-
-
+import Spinner from 'react-bootstrap/Spinner';
 
 
 const Tables = () => {
-   const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);
   const [tableId, setTableId] = useState('');
   const handleClose = () => setShow(false);
-  const handleShow = (tableToDelete) => { 
+  const handleShow = (tableToDelete) => {
     setShow(true);
     setTableId(tableToDelete);
   }
 
-
-
-
-
-
   const dispatch = useDispatch();
-
 
   const handleDelete = () => {
     setShow(false)
-    console.log('tableid', tableId);
     const string = tableId.toString()
     dispatch(removeTableRequest(string));
   }
-    
- const tables = useSelector(getAllTables);
+
+  const tables = useSelector(getAllTables);
+
+  if (!tables.length) {
+    return (
+      <Container className='mb-4 d-flex justify-content-center'>
+        <Spinner variant="primary" className={styles.spinner} animation="border" role="status">
+        </Spinner>
+        <span className={styles.message}>Loading...</span>
+      </Container>
+    )
+  }
 
 
   return (
 
     <Container className='mb-4'>
       <ListGroup>
-      {tables.map(table => (
-        <ListGroup.Item key={table.id} xs={12} md={3} className='d-flex justify-content-between'>
-          <div className={styles.textWrapper}>
-          <h3 className='pt-2'>Table {table.id}</h3>
-          <p><span className={styles.caption}>Status:</span>{table.status}</p>
-          </div>
-          <div>
-          <Link key={table.id} to={'/table/' + table.id}><Button className='m-2' variant="primary">Show More</Button></Link>
-          <Button variant="outline-danger" className='m-2' onClick={() => handleShow(table.id)}>Delete</Button>
-          </div>
+        {tables.map(table => (
+          <ListGroup.Item key={table.id} xs={12} md={3} className='d-flex justify-content-between'>
+            <div className={styles.textWrapper}>
+              <h3 className='pt-2'>Table {table.id}</h3>
+              <p><span className={styles.caption}>Status:</span>{table.status}</p>
+            </div>
+            <div>
+              <Link key={table.id} to={'/table/' + table.id}><Button className='m-2' variant="primary">Show More</Button></Link>
+              <Button variant="outline-danger" className='m-2' onClick={() => handleShow(table.id)}>Delete</Button>
+            </div>
           </ListGroup.Item>
-      ))}
+        ))}
       </ListGroup>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -77,4 +78,3 @@ const Tables = () => {
 };
 
 export default Tables;
-
