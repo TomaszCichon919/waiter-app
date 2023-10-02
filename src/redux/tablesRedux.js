@@ -61,7 +61,7 @@ export const addTableRequest = (newTable) => {
                     },
                     body: JSON.stringify(editedTable),
                   };
-            fetch(API_URL + '/tables', options)
+            fetch(API_URL + '/tables/', options)
             .then(() => dispatch(editTable(editedTable)))
                 }
             }
