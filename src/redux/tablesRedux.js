@@ -47,7 +47,7 @@ export const addTableRequest = (newTable) => {
             const options = {
                 method: 'DELETE',
             }
-        fetch(API_URL + '/tables'+ tableToRemove, options)
+        fetch(API_URL + '/tables/'+ tableToRemove, options)
         .then(() => dispatch(removeTable(tableToRemove)))
             }
         }
