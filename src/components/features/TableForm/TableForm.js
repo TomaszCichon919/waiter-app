@@ -16,13 +16,10 @@ const PostForm = ({ action, actionText, ...props }) => {
     const handleSelectChange = (e) => {
         setStatus(e.target.value);
         if (e.target.value === "Free" || e.target.value === "Cleaning") {
-            console.log('change');
             setPeopleAmount(0);
         } else if (e.target.value === "Busy") {
             setBill(0);
-        } else {
-            console.log('faliure');
-        }
+        } 
     };
 
     const handlePeopleAmountChange = (e) => {
